@@ -2,55 +2,81 @@
 
 #include <stdlib.h>
 
-LinkedList LL_create() {
+LinkedList LL_init() {
 	LinkedList ret;
+
 	ret.head = NULL;
 	ret.tail = NULL;
 	ret.count = 0;
+
+	return ret;
+}
+
+LinkedList* LL_create() {
+	LinkedList* ret = malloc(sizeof(LinkedList));
+	*ret = LL_init()l=;
 	return ret;
 }
 
 void LL_pushFront(LinkedList* ll, void* data) {
 	struct LLNode* newHead = malloc(sizeof(struct LLNode));
+
+	// initialize the new head of the list
 	newHead->data = data;
 	newHead->next = ll->head;
 	newHead->prev = NULL;
+
+	// handle the case where this is the first element pushed
 	if(ll->head) ll->head->prev = newHead;
 	else ll->tail = newHead;
 	ll->head = newHead;
+
 	++(ll->count);
 }
 
 void LL_pushBack(LinkedList* ll, void* data) {
 	struct LLNode* newTail = malloc(sizeof(struct LLNode));
+
+	// initialize the new tail of the list
 	newTail->data = data;
 	newTail->next = NULL;
 	newTail->prev = ll->tail;
+
+	// handle the case where this is the first element being pushed
 	if(ll->tail) ll->tail->next = newTail;
 	else ll->head = newTail;
 	ll->tail = newTail;
+
 	++(ll->count);
 }
 
 void* LL_popFront(LinkedList* ll) {
 	struct LLNode* headNext = ll->head->next;
 	void* ret = ll->head->data;
+
+	// handle the case where this is the last element being popped
 	free(ll->head);
 	if(headNext) headNext->prev = NULL;
 	else ll->tail = NULL;
 	ll->head = headNext;
+
 	--(ll->count);
+
 	return ret;
 }
 
 void* LL_popBack(LinkedList* ll) {
 	struct LLNode* tailPrev = ll->tail->prev;
 	void* ret = ll->tail->data;
+
+	// handle the case where this is the last element being popped
 	free(ll->tail);
 	if(tailPrev) tailPrev->next = NULL;
 	else ll->head = NULL;
 	ll->tail = tailPrev;
+
 	--(ll->count);
+
 	return ret;
 }
 
@@ -73,11 +99,14 @@ unsigned int LL_count(const LinkedList* ll) {
 void LL_clear(LinkedList* ll, void (*destroy)(void*)) {
 	struct LLNode* headNext;
 	while(ll->head) {
+		// destroy the data inside the front node
 		if(ll->head->data) (*destroy)(ll->head->data);
+		// free the front node and set it to the next node
 		headNext = ll->head->next;
 		free(ll->head);
 		ll->head = headNext;
 	}
+	// reset values
 	ll->tail = NULL;
 	ll->count = 0;
 }
