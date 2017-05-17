@@ -45,7 +45,7 @@ LinkedList LL_init();
 return		(LinkedList*)
 	malloc'ed and initialized LinkedList
 
-Allocates space for and initialized a LinkedList
+Allocates space for and initializes a LinkedList
 */
 LinkedList* LL_create();
 
