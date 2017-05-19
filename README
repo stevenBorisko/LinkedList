@@ -5,6 +5,8 @@ This, like all the other C data structure repositories on my Github,
 was made so that neither you nor I will ever have to rewrite any of them
 again for any other projects in the future.
 
+Functions of a LinkedList (documentation in header file)
+
 Creating a LinkedList
 LinkedList LL_init();
 LinkedList* LL_create();
