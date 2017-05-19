@@ -1,0 +1,25 @@
+This is a struct called LinkedList that is a
+generic linked list data structure.
+
+This, like all the other C data structure repositories on my Github,
+was made so that neither you nor I will ever have to rewrite any of them
+again for any other projects in the future.
+
+Creating a LinkedList
+LinkedList LL_init();
+LinkedList* LL_create();
+
+Insertion and Removal
+void LL_pushFront(LinkedList* ll, void* data);
+void LL_pushBack(LinkedList* ll, void* data);
+void* LL_popFront(LinkedList* ll);
+void* LL_popBack(LinkedList* ll);
+
+Miscellaneous
+void* LL_peekFront(const LinkedList* ll);
+void* LL_peekBack(const LinkedList* ll);
+int LL_isEmpty(const LinkedList* ll);
+unsigned int LL_count(const LinkedList* ll);
+void LL_clear(LinkedList* ll, void (*destroy)(void*));
+void LL_insert(LinkedList* ll, unsigned int index, void* data);
+void* LL_at(const LinkedList* ll, unsigned int index);
