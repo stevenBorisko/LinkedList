@@ -14,7 +14,7 @@ LinkedList LL_init() {
 
 LinkedList* LL_create() {
 	LinkedList* ret = malloc(sizeof(LinkedList));
-	*ret = LL_init()l=;
+	*ret = LL_init();
 	return ret;
 }
 
