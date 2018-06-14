@@ -1,27 +1,47 @@
-This is a struct called LinkedList that is a
-generic linked list data structure.
+Generic linked list data structure
 
 This, like all the other C data structure repositories on my Github,
 was made so that neither you nor I will ever have to rewrite any of them
 again for any other projects in the future.
 
-Functions of a LinkedList (documentation in header file)
+Full documentation on usage is found in Queue.h
 
-Creating a LinkedList
-LinkedList LL_init();
-LinkedList* LL_create();
+Structs:
+	struct LLNode:
+		- Wrapper struct for storing data in a LinkedList
+	LinkedList:
+		- Doubly Linked List data structure. Functions found below
 
-Insertion and Removal
-void LL_pushFront(LinkedList* ll, void* data);
-void LL_pushBack(LinkedList* ll, void* data);
-void* LL_popFront(LinkedList* ll);
-void* LL_popBack(LinkedList* ll);
+Creating a LinkedList Functions:
+	LinkedList LL_init()
+		- Creates a LinkedList and initializes it to an empty list
+	LinkedList* LL_create()
+		- Allocates space for and initializes a LinkedList
 
-Miscellaneous
-void* LL_peekFront(const LinkedList* ll);
-void* LL_peekBack(const LinkedList* ll);
-int LL_isEmpty(const LinkedList* ll);
-unsigned int LL_count(const LinkedList* ll);
-void LL_clear(LinkedList* ll, void (*destroy)(void*));
-void LL_insert(LinkedList* ll, unsigned int index, void* data);
-void* LL_at(const LinkedList* ll, unsigned int index);
+Insertion and Removal Functions:
+	void LL_pushFront(LinkedList* ll, void* data)
+		- Inserts a new element to the front of the list
+	void LL_pushBack(LinkedList* ll, void* data)
+		- Inserts a new element to the back of the list
+	void* LL_popFront(LinkedList* ll)
+		- Removes the element at the front of the list and returns it
+	void* LL_popBack(LinkedList* ll)
+		- Removes the element at the back of the list and returns it
+
+Miscellaneous Functions:
+	void* LL_peekFront(const LinkedList* ll)
+		- Returns the front of the list
+	void* LL_peekBack(const LinkedList* ll)
+		- Returns the back of the list
+	int LL_isEmpty(const LinkedList* ll)
+		- Returns whether the list is empty
+	unsigned int LL_count(const LinkedList* ll)
+		- Returns the number of elements in the list
+	void LL_clear(LinkedList* ll, void (*destroy)(void*))
+		- Empties the list
+	void LL_insert(LinkedList* ll, unsigned int index, void* data)
+		- Inserts an element into the list at a specific index
+	void* LL_remove(LinkedList* ll, unsigned int index)
+		- Removes an element from the list at a specific index
+	void* LL_at(const LinkedList* ll, unsigned int index)
+		- Returns the element at a specified index in the list

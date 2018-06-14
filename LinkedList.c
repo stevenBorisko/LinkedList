@@ -1,7 +1,5 @@
 #include "LinkedList.h"
 
-#include <stdlib.h>
-
 LinkedList LL_init() {
 	LinkedList ret;
 
@@ -53,9 +51,9 @@ void LL_pushBack(LinkedList* ll, void* data) {
 void* LL_popFront(LinkedList* ll) {
 	struct LLNode* headNext = ll->head->next;
 	void* ret = ll->head->data;
+	free(ll->head);
 
 	// handle the case where this is the last element being popped
-	free(ll->head);
 	if(headNext) headNext->prev = NULL;
 	else ll->tail = NULL;
 	ll->head = headNext;
@@ -68,9 +66,9 @@ void* LL_popFront(LinkedList* ll) {
 void* LL_popBack(LinkedList* ll) {
 	struct LLNode* tailPrev = ll->tail->prev;
 	void* ret = ll->tail->data;
+	free(ll->tail);
 
 	// handle the case where this is the last element being popped
-	free(ll->tail);
 	if(tailPrev) tailPrev->next = NULL;
 	else ll->head = NULL;
 	ll->tail = tailPrev;
@@ -147,6 +145,45 @@ void LL_insert(LinkedList* ll, unsigned int index, void* data) {
 	newNode->next = currNode;
 
 	++(ll->count);
+}
+
+void* LL_remove(LinkedList* ll, unsigned int index) {
+	// if the index is the count, that's just a popBack
+	if(index == (ll->count - 1)) {
+		return LL_popBack(ll);
+	}
+	// if the index is 0, that's just a popFront
+	if(index == 0) {
+		return LL_popFront(ll);
+	}
+
+	void* retval;
+	struct LLNode* currNode;
+	struct LLNode* tempNode;
+
+	unsigned int a;
+
+	// if the index is less than half the count, start from the head
+	if(index <= (ll->count >> 1)) {
+		currNode = ll->head;
+		a = 0;
+		while(++a <= index) currNode = currNode->next;
+	}
+	// the index is greater than half the count, so start from the tail
+	else {
+		currNode = ll->tail;
+		a = ll->count;
+		while(--a >= index) currNode = currNode->prev;
+	}
+
+	currNode->prev->next = currNode->next;
+	currNode->next->prev = currNode->prev;
+
+	--(ll->count);
+
+	retval = currNode->data;
+	free(currNode);
+	return retval;
 }
 
 void* LL_at(const LinkedList* ll, unsigned int index) { 
