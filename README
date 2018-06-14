@@ -12,13 +12,13 @@ Structs:
 	LinkedList:
 		- Doubly Linked List data structure. Functions found below
 
-Creating a LinkedList Functions:
+LinkedList Creation Functions:
 	LinkedList LL_init()
 		- Creates a LinkedList and initializes it to an empty list
 	LinkedList* LL_create()
 		- Allocates space for and initializes a LinkedList
 
-Insertion and Removal Functions:
+LinkedList Insertion and Removal Functions:
 	void LL_pushFront(LinkedList* ll, void* data)
 		- Inserts a new element to the front of the list
 	void LL_pushBack(LinkedList* ll, void* data)
@@ -28,7 +28,7 @@ Insertion and Removal Functions:
 	void* LL_popBack(LinkedList* ll)
 		- Removes the element at the back of the list and returns it
 
-Miscellaneous Functions:
+LinkedList Miscellaneous Functions:
 	void* LL_peekFront(const LinkedList* ll)
 		- Returns the front of the list
 	void* LL_peekBack(const LinkedList* ll)
