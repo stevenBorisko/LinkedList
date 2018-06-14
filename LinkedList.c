@@ -10,12 +10,6 @@ LinkedList LL_init() {
 	return ret;
 }
 
-LinkedList* LL_create() {
-	LinkedList* ret = malloc(sizeof(LinkedList));
-	*ret = LL_init();
-	return ret;
-}
-
 void LL_pushFront(LinkedList* ll, void* data) {
 	struct LLNode* newHead = malloc(sizeof(struct LLNode));
 

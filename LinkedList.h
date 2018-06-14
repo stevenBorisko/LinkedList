@@ -58,16 +58,6 @@ Creates a LinkedList and initializes it to an empty list
 LinkedList LL_init();
 
 /*
---- LL_create ---
-
-return (LinkedList*)
-	Malloc'ed and initialized LinkedList
-
-Allocates space for and initializes a LinkedList
-*/
-LinkedList* LL_create();
-
-/*
 --- LL_pushFront ---
 
 ll (LinkedList*)

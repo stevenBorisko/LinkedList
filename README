@@ -15,8 +15,6 @@ Structs:
 LinkedList Creation Functions:
 	LinkedList LL_init()
 		- Creates a LinkedList and initializes it to an empty list
-	LinkedList* LL_create()
-		- Allocates space for and initializes a LinkedList
 
 LinkedList Insertion and Removal Functions:
 	void LL_pushFront(LinkedList* ll, void* data)
