@@ -45,3 +45,9 @@ LinkedList Miscellaneous Functions:
 		- Removes an element from the list at a specific index
 	void* LL_at(const LinkedList* ll, unsigned int index)
 		- Returns the element at a specified index in the list
+	unsigned int LL_search(
+		const LinkedList* ll,
+		int (*match)(void*),
+		void** data
+	)
+		- Searches a list for a specific element.

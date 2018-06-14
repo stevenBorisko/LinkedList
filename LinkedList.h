@@ -71,9 +71,9 @@ LinkedList* LL_create();
 --- LL_pushFront ---
 
 ll (LinkedList*)
-	- List to which p:data will be pushed in the front
+	- List to which `data` will be pushed in the front
 data (void*)
-	- Data to be pushed to p:ll
+	- Data to be pushed to `ll`
 
 Inserts a new element to the front of the list
 */
@@ -83,9 +83,9 @@ void LL_pushFront(LinkedList* ll, void* data);
 --- LL_pushBack ---
 
 ll (LinkedList*)
-	- List to which p:data will be pushed in the back
+	- List to which `data` will be pushed in the back
 data (void*)
-	- Data to be pushed to p:ll
+	- Data to be pushed to `ll`
 
 Inserts a new element to the back of the list
 */
@@ -98,7 +98,7 @@ ll (LinkedList*)
 	- List from which the return value will be popped from the front
 
 return (void*)
-	Data popped from p:ll
+	Data popped from `ll`
 
 Removes the element at the front of the list and returns it
 */
@@ -111,7 +111,7 @@ ll (LinkedList*)
 	- List from which the return value will be popped from the back
 
 return (void*)
-	Data popped from p:ll
+	Data popped from `ll`
 
 Removes the element at the back of the list and returns it
 */
@@ -152,7 +152,7 @@ ll (const LinkedList*)
 	- List to be inspected
 
 return (int)
-	Whether p:ll contains any elements
+	Whether `ll` contains any elements
 
 Returns whether the list is empty
 */
@@ -177,7 +177,9 @@ unsigned int LL_count(const LinkedList* ll);
 ll (LinkedList*)
 	- List to be cleared
 destroy (void (void*))
-	- Function that handles the freeing of v:data in each element of p:list
+	- param (void*)
+		* data to be freed (or not, if you need to keep the elements elsewhere)
+	- Function that handles the freeing of `data` in each element of `ll`
 
 Empties the list
 */
@@ -187,11 +189,11 @@ void LL_clear(LinkedList* ll, void (*destroy)(void*));
 --- LL_insert ---
 
 ll (LinkedList*)
-	- List into which p:data will be inserted at index p:index
+	- List into which `data` will be inserted at index `index`
 index (unsigned int)
-	- Index at which p:data will be inserted into p:ll
+	- Index at which `data` will be inserted into `ll`
 data (void*)
-	- Data to be inserted into p:ll at index p:index
+	- Data to be inserted into `ll` at index `index`
 
 Inserts an element into the list at a specific index
 */
@@ -201,12 +203,12 @@ void LL_insert(LinkedList* ll, unsigned int index, void* data);
 --- LL_remove ---
 
 ll (LinkedList*)
-	- List from which the element at p:index will be removed
+	- List from which the element at `index` will be removed
 index (unsigned int)
 	- Index of the element to remove
 
 return (void*)
-	- Data at p:index prior to removal
+	- Data at `index` prior to removal
 
 Removes an element from the list at a specific index
 */
@@ -218,12 +220,44 @@ void* LL_remove(LinkedList* ll, unsigned int index);
 ll (const LinkedList*)
 	- List to be inspected
 index (unsigned int)
-	- Index from which an element will be returned from p:ll
+	- Index from which an element will be returned from `ll`
 return (void*)
-	- The element at index p:index in p:ll
+	- The element at index `index` in `ll`
 
 Returns the element at a specified index in the list
 */
 void* LL_at(const LinkedList* ll, unsigned int index);
+
+/*
+--- LL_search ---
+
+ll (const LinkedList*)
+	- List to be inspected
+match (int (void*))
+	- param (void*)
+		* data that is being searched
+	- return (int)
+		0: data does not match, keep searching
+		1: data matches, return it
+	- Functions to determine if an element is the one for which the
+	function is searching
+data (void**)
+	- The address of an allocated void*. This void* will be set to the data
+	found (if it was found).
+	- If the data was not found, this is set to NULL
+
+return (unsigned int)
+	ll->count: data was not found.
+	< ll->count: data was found. Value is the index in the list. `*data`
+		will be set to the data of this element
+
+Searches a list for a specific element.
+	- Returns both the element and the index.
+*/
+unsigned int LL_search(
+	const LinkedList* ll,
+	int (*match)(void*),
+	void** data
+);
 
 #endif

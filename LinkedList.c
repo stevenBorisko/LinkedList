@@ -203,3 +203,24 @@ void* LL_at(const LinkedList* ll, unsigned int index) {
 	}
 	return currNode->data;
 }
+
+unsigned int LL_search(
+	const LinkedList* ll,
+	int (*match)(void*),
+	void** data
+) {
+	struct LLNode* currNode;
+	unsigned int retval;
+	for(
+		currNode = ll->head, retval = 0;
+		currNode;
+		currNode = currNode->next, ++retval
+	) {
+		if(match(currNode->data)) {
+			*data = currNode->data;
+			return retval;
+		}
+	}
+	*data = NULL;
+	return retval;
+}
