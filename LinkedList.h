@@ -8,29 +8,29 @@
 //----------------------------------------------------------------------------//
 
 /*
---- struct LLNode ---
+--- LLNode ---
 
 data (void*)
 	- The data stored in the linked list
-next (struct LLNode*)
+next (LLNode*)
 	- One node closer to the back of the list
-prev (struct LLNode*)
+prev (LLNode*)
 	- One node closer to the front of the list
 
 Wrapper struct for storing data in a LinkedList
 */
-struct LLNode {
+typedef struct LLNode {
 	void* data;
 	struct LLNode* next;
 	struct LLNode* prev;
-};
+} LLNode;
 
 /*
 --- LLNode ---
 
-head (struct LLNode*)
+head (LLNode*)
 	- The front of the list, 
-tail (struct LLNode*)
+tail (LLNode*)
 	- The back of the list, 
 count (unsigned int)
 	- The number of elements in the list
@@ -38,10 +38,10 @@ count (unsigned int)
 Doubly Linked List data structure. Functions found below
 */
 typedef struct {
-	struct LLNode* head;
-	struct LLNode* tail;
+	LLNode* head;
+	LLNode* tail;
 	unsigned int count;
-}LinkedList;
+} LinkedList;
 
 //----------------------------------------------------------------------------//
 // --- LinkedList Function Declarations ---
@@ -249,5 +249,19 @@ unsigned int LL_search(
 	int (*match)(void*),
 	void** data
 );
+
+/*
+--- LL_array ---
+
+ll (const LinkedList*)
+	- List to be converted
+arr (void**)
+	- Memory allocated prior to function call
+		* array must be at least `ll->count` elements long
+	- Will be filled with a shallow copy of the data in `ll`
+
+Performs a shallow copy of the data in a LinkedList into an array
+*/
+void LL_array(const LinkedList* ll, void** arr);
 
 #endif

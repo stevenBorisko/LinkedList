@@ -7,7 +7,7 @@ again for any other projects in the future.
 Full documentation on usage is found in Queue.h
 
 Structs:
-	struct LLNode:
+	LLNode:
 		- Wrapper struct for storing data in a LinkedList
 	LinkedList:
 		- Doubly Linked List data structure. Functions found below
@@ -49,3 +49,5 @@ LinkedList Miscellaneous Functions:
 		void** data
 	)
 		- Searches a list for a specific element.
+	void LL_array(const LinkedList* ll, void** arr)
+		- Performs a shallow copy of the data in a LinkedList into an array

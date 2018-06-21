@@ -11,7 +11,7 @@ LinkedList LL_init() {
 }
 
 void LL_pushFront(LinkedList* ll, void* data) {
-	struct LLNode* newHead = malloc(sizeof(struct LLNode));
+	LLNode* newHead = malloc(sizeof(LLNode));
 
 	// initialize the new head of the list
 	newHead->data = data;
@@ -27,7 +27,7 @@ void LL_pushFront(LinkedList* ll, void* data) {
 }
 
 void LL_pushBack(LinkedList* ll, void* data) {
-	struct LLNode* newTail = malloc(sizeof(struct LLNode));
+	LLNode* newTail = malloc(sizeof(LLNode));
 
 	// initialize the new tail of the list
 	newTail->data = data;
@@ -43,7 +43,7 @@ void LL_pushBack(LinkedList* ll, void* data) {
 }
 
 void* LL_popFront(LinkedList* ll) {
-	struct LLNode* headNext = ll->head->next;
+	LLNode* headNext = ll->head->next;
 	void* ret = ll->head->data;
 	free(ll->head);
 
@@ -58,7 +58,7 @@ void* LL_popFront(LinkedList* ll) {
 }
 
 void* LL_popBack(LinkedList* ll) {
-	struct LLNode* tailPrev = ll->tail->prev;
+	LLNode* tailPrev = ll->tail->prev;
 	void* ret = ll->tail->data;
 	free(ll->tail);
 
@@ -89,7 +89,7 @@ unsigned int LL_count(const LinkedList* ll) {
 }
 
 void LL_clear(LinkedList* ll, void (*destroy)(void*)) {
-	struct LLNode* headNext;
+	LLNode* headNext;
 	while(ll->head) {
 		// destroy the data inside the front node
 		if(ll->head->data) (*destroy)(ll->head->data);
@@ -115,8 +115,8 @@ void LL_insert(LinkedList* ll, unsigned int index, void* data) {
 		return;
 	}
 
-	struct LLNode* currNode;
-	struct LLNode* newNode = malloc(sizeof(struct LLNode));
+	LLNode* currNode;
+	LLNode* newNode = malloc(sizeof(LLNode));
 	newNode->data = data;
 	unsigned int a;
 
@@ -152,8 +152,8 @@ void* LL_remove(LinkedList* ll, unsigned int index) {
 	}
 
 	void* retval;
-	struct LLNode* currNode;
-	struct LLNode* tempNode;
+	LLNode* currNode;
+	LLNode* tempNode;
 
 	unsigned int a;
 
@@ -181,7 +181,7 @@ void* LL_remove(LinkedList* ll, unsigned int index) {
 }
 
 void* LL_at(const LinkedList* ll, unsigned int index) { 
-	struct LLNode* currNode;
+	LLNode* currNode;
 	unsigned int a;
 	// if the index is less than half the count, start from the head
 	if(index <= (ll->count >> 1)) {
@@ -203,7 +203,7 @@ unsigned int LL_search(
 	int (*match)(void*),
 	void** data
 ) {
-	struct LLNode* currNode;
+	LLNode* currNode;
 	unsigned int retval;
 	for(
 		currNode = ll->head, retval = 0;
@@ -217,4 +217,17 @@ unsigned int LL_search(
 	}
 	*data = NULL;
 	return retval;
+}
+
+void LL_array(const LinkedList* ll, void** arr) {
+	LLNode* currNode;
+	unsigned int index;
+
+	currNode = ll->head;
+	index = 0;
+	while(currNode) {
+		arr[index] = currNode->data;
+		currNode = currNode->next;
+		++index;
+	}
 }
